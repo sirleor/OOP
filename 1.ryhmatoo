@@ -11,28 +11,31 @@ public class PuhkusteKüsija {
         java.io.File fail = new java.io.File("C:/Users/sirle/IdeaProjects/1.ryhmatoo/puhkusteandmed.txt");
         Path path = Paths.get("C:/Users/sirle/IdeaProjects/1.ryhmatoo/puhkusteandmed.txt");   //kust võtta
         long lineCount = Files.lines(path).count();                                                //loeb read kokku
-        System.out.println(lineCount);
-        Writer output;
+        System.out.println(lineCount);                                 //prindib välja ridade arvu
+        Writer output;                                                //loob writeri
 
 
-        for (int i = 0; lineCount <2 ; i++) {//kui ridade arv on väiksem kui 20, siis küsib andmeid
+        for (int i = 0; lineCount <3 ; i++) {//kui ridade arv on väiksem kui 20, siis küsib andmeid NB!Siin tuleb 3 ära muuta 20-ks kui testandmed on olemas!
             output = new BufferedWriter(new FileWriter(fail, true)); //loob writeri ja lisab sinna andmed
             Scanner scan = new Scanner(System.in);  //skänneri loomine
             System.out.println("Sisesta oma nimi");   //kasutajalt küsimine
             String nimi = scan.nextLine();         //sisendi saamine
             System.out.println("Sisesta spetsiifika");
             String spetsiifika = scan.nextLine();
-            System.out.println("Sisesta puhkuseperioodi algus pp.kk.aaaa");
+            System.out.println("Sisesta puhkuseperioodi algus pp.kk");
             String periooda = scan.nextLine();
-            System.out.println("Sisesta puhkuseperioodi lõpp pp.kk.aaaa");
+            System.out.println("Sisesta puhkuseperioodi lõpp pp.kk");
             String perioodl = scan.nextLine();
            // System.out.println(nimi);
            // System.out.println(spetsiifika);
            // System.out.println(periood);
+            lineCount=Files.lines(path).count();          //arvutab uue ridade arvu
+            output.append((lineCount+1)+" "+nimi +" "+spetsiifika+" "+periooda+" "+perioodl+" "+"\n");  //leiab ridadearvust õige järjekoha ja teeb reakande faili
 
-            output.append(nimi +" "+spetsiifika+" "+periooda+" "+perioodl+" "+"\n");
-            lineCount=Files.lines(path).count();
-            output.close();
+            if (3-lineCount>0){
+            System.out.println("Puudu on "+(3-lineCount) +" kanne(t)");}//NB! Siin tuleb 3 ära muuta 20-ks, kui testandmed on olemas.
+
+            output.close();  //faili pole vaja, sulgeb
 
 
         }
@@ -40,3 +43,4 @@ public class PuhkusteKüsija {
 
 }
 }
+
