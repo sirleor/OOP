@@ -1,0 +1,42 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+public class PuhkusteKüsija {
+
+    public static void main(String[] args) throws Exception{
+        java.io.File fail = new java.io.File("C:/Users/sirle/IdeaProjects/1.ryhmatoo/puhkusteandmed.txt");
+        Path path = Paths.get("C:/Users/sirle/IdeaProjects/1.ryhmatoo/puhkusteandmed.txt");   //kust võtta
+        long lineCount = Files.lines(path).count();                                                //loeb read kokku
+        System.out.println(lineCount);
+        Writer output;
+
+
+        for (int i = 0; lineCount <2 ; i++) {//kui ridade arv on väiksem kui 20, siis küsib andmeid
+            output = new BufferedWriter(new FileWriter(fail, true)); //loob writeri ja lisab sinna andmed
+            Scanner scan = new Scanner(System.in);  //skänneri loomine
+            System.out.println("Sisesta oma nimi");   //kasutajalt küsimine
+            String nimi = scan.nextLine();         //sisendi saamine
+            System.out.println("Sisesta spetsiifika");
+            String spetsiifika = scan.nextLine();
+            System.out.println("Sisesta puhkuseperioodi algus pp.kk.aaaa");
+            String periooda = scan.nextLine();
+            System.out.println("Sisesta puhkuseperioodi lõpp pp.kk.aaaa");
+            String perioodl = scan.nextLine();
+           // System.out.println(nimi);
+           // System.out.println(spetsiifika);
+           // System.out.println(periood);
+
+            output.append(nimi +" "+spetsiifika+" "+periooda+" "+perioodl+" "+"\n");
+            lineCount=Files.lines(path).count();
+            output.close();
+
+
+        }
+
+
+}
+}
